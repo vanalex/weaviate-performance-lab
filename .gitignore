@@ -1,0 +1,25 @@
+# Weaviate node data volumes
+data-node-1/
+data-node-2/
+data-node-3/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# OS/Editor files
+.DS_Store
+*.swp
+*.swo
+.vscode/
+__pycache__/
+.ipynb_checkpoints/
+
+# Docker artifacts
+*.pid
+
+# Python artifacts
+*.pyc
+*.pyo
+
+# Environment
