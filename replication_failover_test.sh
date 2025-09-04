@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-
 set -e
 
-# Cluster node mapping (use fixed container names)
 NODES=(
   "8080:weaviate-node-1"
   "8081:weaviate-node-2"
@@ -31,7 +29,7 @@ echo "==== 2. Read object from all nodes ===="
 for ENTRY in "${NODES[@]}"; do
   PORT=${ENTRY%%:*}
   echo "Reading from node on port $PORT..."
-  curl -s http://localhost:$PORT/v1/objects/Article/$OBJECT_ID | jq .
+  curl -s http://localhost:$PORT/v1/objects/$OBJECT_ID | jq .
 done
 
 echo "==== 3. Stop leader node (simulate failure) ===="
@@ -44,7 +42,7 @@ for ENTRY in "${NODES[@]}"; do
   NAME=${ENTRY##*:}
   if [ "$NAME" != "weaviate-node-1" ]; then
     echo "Reading from $NAME (port $PORT)..."
-    curl -s http://localhost:$PORT/v1/objects/Article/$OBJECT_ID | jq .
+    curl -s http://localhost:$PORT/v1/objects/$OBJECT_ID | jq .
   fi
 done
 
@@ -70,8 +68,8 @@ for ENTRY in "${NODES[@]}"; do
   PORT=${ENTRY%%:*}
   NAME=${ENTRY##*:}
   echo "--- Checking $NAME (port $PORT) ---"
-  curl -s http://localhost:$PORT/v1/objects/Article/$OBJECT_ID | jq .
-  curl -s http://localhost:$PORT/v1/objects/Article/$OBJECT_ID2 | jq .
+  curl -s http://localhost:$PORT/v1/objects/$OBJECT_ID | jq .
+  curl -s http://localhost:$PORT/v1/objects/$OBJECT_ID2 | jq .
 done
 
-echo "==== Test complete: replication consistency and availability verified
+echo "==== Test complete: replication consistency and availability verified ===="

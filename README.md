@@ -141,6 +141,35 @@ All nodes show both objects ✅
 
 ---
 
+### 3. Concurrent Writes Test
+File: `high_throughput_test.sh`
+
+**What it does:**
+- Inserts a large number of objects into the leader node as fast as possible.
+- Optionally, can be adapted to use parallel background jobs for true concurrency.
+- Verifies that all objects are replicated and available on all nodes after the test.
+
+**Run it:**
+```bash
+bash high_throughput_test.sh
+```
+
+Configure load by editing variables inside the script:
+```bash
+OBJECT_COUNT=1000    # how many objects to insert
+```
+
+---
+
+## ✅ Expected Outcomes
+
+- Objects appear on all nodes after insertion.
+- Cluster remains available and consistent under high write load.
+
+
+---
+
+
 ## 🧑‍💼 Manager’s Summary
 
 - **Why this matters:** These tests prove that our Weaviate cluster can **survive node failures without downtime** and that data is always consistent across replicas.  

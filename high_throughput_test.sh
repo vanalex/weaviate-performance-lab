@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-
 set -e
 
-# Use fixed container names and mapped ports
 NODES=(
   "8080:weaviate-node-1"
   "8081:weaviate-node-2"
@@ -33,8 +31,8 @@ for ENTRY in "${NODES[@]}"; do
   PORT=${ENTRY%%:*}
   NAME=${ENTRY##*:}
   echo "Checking $NAME (port $PORT)..."
-  COUNT=$(curl -s "http://localhost:$PORT/v1/objects?class=Article&limit=1" | jq '.totalResults')
+  COUNT=$(curl -s "http://localhost:$PORT/v1/objects?class=Article&limit=0" | jq '.totalResults')
   echo "$NAME reports $COUNT objects."
 done
 
-echo "==== High Throughput
+echo "==== High Throughput Test Completed ===="
