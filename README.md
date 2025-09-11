@@ -169,6 +169,27 @@ OBJECT_COUNT=1000    # how many objects to insert
 
 ---
 
+### 4. Vector Search Accuracy
+File: `vector_search_accuracy.sh`
+
+**What it does:**
+- Tested a 3-node Weaviate cluster: inserted known vectors [1,0,0], [0,1,0], [0,0,1] and ran a nearVector query.
+- The correct nearest neighbor was returned across all nodes — proving replication and Raft consensus don’t break search correctness.
+
+**Run it:**
+```bash
+sh vector_search_accuracy.sh
+```
+
+---
+
+## ✅ Expected Outcomes
+
+- The correct nearest neighbor was returned across all nodes — proving replication and Raft consensus don’t break search correctness.
+
+---
+
+
 
 ## 🧑‍💼 Manager’s Summary
 
